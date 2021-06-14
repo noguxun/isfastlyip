@@ -1,0 +1,9 @@
+# This file describes a Fastly Compute@Edge package. To learn more visit:
+# https://developer.fastly.com/reference/fastly-toml/
+
+authors = ["xgu+ecp@fastly.com"]
+description = "check if ip belows to fastly or not"
+language = "rust"
+manifest_version = 1
+name = "isfastlyip"
+service_id = ""

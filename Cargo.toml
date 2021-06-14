@@ -1,0 +1,16 @@
+[package]
+name = "compute-starter-kit-rust-default"
+version = "0.1.0"
+authors = []
+edition = "2018"
+
+[profile.release]
+debug = true
+
+[dependencies]
+anyhow = "^1.0"
+fastly = "^0.7"
+regex = "^1.3"
+serde = "^1.0"
+ipnet = "^2.3"
+

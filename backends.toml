@@ -1,0 +1,3 @@
+[local_server.backends]
+  [local_server.backends.fastlyapi]
+  url = "https://api.fastly.com:443"
