@@ -19,7 +19,7 @@ struct IpCheckResult {
 }
 
 #[fastly::main]
-fn main(mut req: Request) -> Result<Response> {
+fn main(req: Request) -> Result<Response> {
     // We can filter requests that have unexpected methods.
     const VALID_METHODS: [Method; 1] = [Method::GET];
     if !(VALID_METHODS.contains(req.get_method())) {
@@ -42,9 +42,11 @@ fn main(mut req: Request) -> Result<Response> {
     let ip_addr = path[1..].to_owned();
 
     // Get IP list info
-    req.set_header(header::HOST, "api.fastly.com");
-    req.set_path("/public-ip-list");
-    let mut resp = req.send(BACKEND_NAME)?;
+    let req_backend = Request::get("https://dummy/public-ip-list")
+        .with_ttl(60 * 60 * 24 * 7)
+        .with_header(header::HOST, "api.fastly.com");
+    let mut resp = req_backend.send(BACKEND_NAME)?;
+
     let ip_list = resp.take_body_json::<FastlyIpList>()?;
 
     if let Ok(ipv4) = ip_addr.parse::<Ipv4Addr>() {
