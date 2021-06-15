@@ -66,7 +66,9 @@ fn main(req: Request) -> Result<Response> {
             }
         }
     } else {
-        assert!(false);
+        return Ok(
+            Response::from_status(StatusCode::NOT_FOUND).with_body("Valid IP address not found")
+        );
     }
 
     return Ok(
